@@ -18,5 +18,15 @@ int main()
 	{
 		std::cout << "noooo " << e.what() << "\n";
 	}
+	bank.addMoney(bank[0], 100);
+	std::cout << bank;
+	try
+	{
+		bank.giveLoan(bank[0], 999999);
+	}
+	catch (std::exception &e)
+	{
+		std::cout << "noooo " << e.what() << "\n";
+	}
 	return (0);
 }

@@ -9,6 +9,8 @@ struct	Bank::Account
 {
 		static int	nextId;
 
+		friend	struct Bank;
+	
 	private:
 		int	id;
 		int	money;

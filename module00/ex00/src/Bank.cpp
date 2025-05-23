@@ -16,7 +16,7 @@ const	Bank::Account 	&Bank::createAccount()
 {
 	Bank::Account	a;
 
-	clients[a.getId()] = a;
+	clients.insert(std::make_pair(a.getId(), a));
 	return clients[a.getId()];
 }
 

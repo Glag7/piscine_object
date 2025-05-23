@@ -18,6 +18,10 @@ int main()
 	{
 		std::cout << "noooo " << e.what() << "\n";
 	}
+	bank.createAccount();
+	std::cout << bank;
+	bank.deleteAccount(bank[1]);
+	std::cout << bank;
 	bank.addMoney(bank[0], 100);
 	std::cout << bank;
 	try
@@ -28,5 +32,27 @@ int main()
 	{
 		std::cout << "noooo " << e.what() << "\n";
 	}
+	bank.giveLoan(bank[0], 100);
+	std::cout << bank;
+	try
+	{
+		bank.payBackLoan(bank[0], 999999);
+	}
+	catch (std::exception &e)
+	{
+		std::cout << "noooo " << e.what() << "\n";
+	}
+	try
+	{
+		bank.payBackLoan(bank[0], 101);
+	}
+	catch (std::exception &e)
+	{
+		std::cout << "noooo " << e.what() << "\n";
+	}
+	bank.payBackLoan(bank[0], 50);
+	std::cout << bank;
+	bank.takeMoney(bank[0], 50);
+	std::cout << bank;
 	return (0);
 }

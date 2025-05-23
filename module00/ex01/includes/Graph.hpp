@@ -4,6 +4,10 @@
 #include <set>
 #include <string>
 #include <stdexcept>
+#include <cmath>
+#include <fstream>
+#include <cstdlib>
+#include <iostream>
 #include "Vector2.hpp"
 
 class	Graph

@@ -5,7 +5,7 @@ int main(int argc, char **argv)
 {
 	try
 	{
-		Graph	graph(Vector2(10, 10));
+		Graph	graph(Vector2(11, 11));
 
 		for (int i = 1; i < argc; ++i)
 		{

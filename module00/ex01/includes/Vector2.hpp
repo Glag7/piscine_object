@@ -1,6 +1,8 @@
 #ifndef VECTOR2_HPP
 # define VECTOR2_HPP
 
+#include <fstream>
+
 struct	Vector2
 {
 	float	x;
@@ -17,5 +19,7 @@ struct	Vector2
 	Vector2	operator+(const Vector2 &v) const;
 	Vector2	operator-(const Vector2 &v) const;
 };
+
+std::ostream	&operator<<(std::ostream &o, const Vector2 &v);
 
 #endif

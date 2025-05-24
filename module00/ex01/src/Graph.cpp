@@ -8,6 +8,7 @@ Graph::Graph(const Vector2 &size) : size(size)
 
 void	Graph::addPoint(const Vector2 &point)
 {
+	std::cout << point << "\n";
 	if (point.x < 0.f || point.x > size.x || point.y < 0.f || point.y > size.y)
 		throw (std::invalid_argument("point out of bounds"));
 	points.insert(point);
@@ -15,18 +16,20 @@ void	Graph::addPoint(const Vector2 &point)
 
 void	Graph::addLine(const Vector2 &start, const Vector2 &end)
 {
+	std::cout << start << " " << end << "\n";
 	if (start.x < 0.f || start.x > size.x || start.y < 0.f || start.y > size.y
 		|| end.x < 0.f || end.x > size.x || end.y < 0.f || end.y > size.y)
 		throw (std::invalid_argument("point out of bounds"));
 
-	Vector2	delta = start - end;
+	Vector2	delta = end - start;
+	std::cout << delta << "\n";
 	float	steps = std::abs(delta.x) > std::abs(delta.y) ? std::abs(delta.x) : std::abs(delta.y);
 	Vector2	inc = Vector2(delta.x / steps, delta.y / steps);
 	Vector2	pos = start;
 	
-	for (float i = 0.f; i < steps; ++i)
+	for (float i = 0.f; i <= steps; ++i)
 	{
-		addPoint(pos);
+		addPoint(Vector2(static_cast<int>(pos.x), static_cast<int>(pos.y)));
 		pos = pos + inc;
 	}
 }
@@ -86,31 +89,35 @@ void	Graph::readFile(const std::string &name)
 
 void	Graph::outputConsole()
 {
+	std::cout << "=======\n";
+	for (std::set<Vector2>::iterator	it = points.begin(); it != points.end(); ++it)
+		std::cout << *it << "\n";
+	std::cout << "\n";
 	std::set<Vector2>::iterator	it = points.begin();
 	Vector2						pos;
 	std::string					line;
 
+	std::cout << "  ";
 	for (int i = 0; i < size.x; ++i)
-		std::cout << " " << i + 1;
-	std::cout << "\n";
-	while (1)
 	{
-		while (it != points.end() && pos < *it)
+		if (i < 11)
+			std::cout << " ";
+		std::cout << i;
+	}
+	std::cout << "\n";
+	for (; pos.y < size.y; ++pos.y)
+	{
+		line = "";
+		for (pos.x = 0; pos.x < size.x; ++pos.x)
 		{
-			++pos.x;
-			line += ".";
-			if (pos.x >= size.x)
+			if (it == points.end() || pos < *it)
+				line += " .";
+			else
 			{
-				std::cout << pos.y + 1 << " " + line << "\n";
-				line = "";
-				pos.x = 0;
-				++pos.y;
-				if (it != points.end())
-					++it;
-				if (pos.y >= size.y)
-					return;
+				line += " X";
+				++it;
 			}
 		}
-		line += "X";
+		std::cout << ((pos.y < 10) ? " " : "") << pos.y << line << "\n";
 	}
 }

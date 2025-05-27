@@ -1,7 +1,5 @@
 #include "Graph.hpp"
 
-uint32_t crc32(const std::vector<uint8_t>& data);
-
 Graph::Graph(const Vector2 &size) : size(size)
 {
 	if (size.x <= 0 || size.y <= 0)
@@ -88,8 +86,6 @@ void	Graph::readFile(const std::string &name)
 
 void	Graph::outputConsole()
 {
-	for (std::set<Vector2>::iterator	it = points.begin(); it != points.end(); ++it)
-		std::cout << *it << "\n";
 	std::set<Vector2>::iterator	it = points.begin();
 	Vector2						pos;
 	std::string					line;
@@ -117,104 +113,4 @@ void	Graph::outputConsole()
 		}
 		std::cout << ((pos.y < 10) ? " " : "") << pos.y << line << "\n";
 	}
-}
-
-static std::vector<uint8_t>	getPngStart(uint32_t wid, uint32_t hei)
-{
-	uint8_t		*widarr = reinterpret_cast<uint8_t *>(&wid);
-	uint8_t		*heiarr = reinterpret_cast<uint8_t *>(&hei);
-	uint32_t	len = wid * hei;
-	uint8_t		*lenarr = reinterpret_cast<uint8_t *>(&len);
-
-	uint8_t data[] = {
-
-        // The 8 byte signature, this basically says "I am a png file"
-        0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A,
-
-        /************* IHDR chunk *************/
-        0x00, 0x00, 0x00, 0x0D, // Length
-        0x49, 0x48, 0x44, 0x52, // Type/Name
-
-        // ----- Chunk Data -----
-        widarr[3], widarr[2], widarr[1], widarr[0], // Width
-        heiarr[3], heiarr[2], heiarr[1], heiarr[0], // Height
-        0x01, // Bit Depth
-        0x00, // Color Type
-        0x00, // Compression Method
-        0x00, // Filter Method
-        0x00, // Interlace Method
-        // ----------------------
-
-        0x90, 0x77, 0x53, 0xDE, // CRC/Checksum
-        /**************************************/
-
-
-        /************* IDAT chunk *************/
-        0x00, 0x00, 0x00, 0x0C, // Length
-        0x49, 0x44, 0x41, 0x54, // Type/Name
-
-        // ----- Chunk Data -----
-        0x08, 0xD7, 0x63, 0xF8,
-        0xCF, 0xC0, 0x00, 0x00,
-        0x03, 0x01, 0x01, 0x00,
-        // ----------------------
-
-        0x18, 0xDD, 0x8D, 0xB0, // CRC/Checksum
-        /**************************************/
-
-        /************* IDAT chunk *************/
-        lenarr[3], lenarr[2], lenarr[1], lenarr[0], // Length
-        0x49, 0x44, 0x41, 0x54, // Type/Name
-
-    };
-	return std::vector<uint8_t>(data, data + sizeof(data)/sizeof(data[0]));
-}
-
-static std::vector<uint8_t>	getPngEnd()
-{
-	uint8_t data[] = {
-        //end of previous chunk
-		0x18, 0xDD, 0x8D, 0xB0, // CRC/Checksum
-        /**************************************/
-
-        /************* IEND chunk *************/
-        0x00, 0x00, 0x00, 0x00, // Length
-        0x49, 0x45, 0x4E, 0x44, // Type/Name
-        // ----- Chunk Data -----
-        // No Data since length is 0
-        // ----------------------
-        0xAE, 0x42, 0x60, 0x82 // CRC/Checksum
-        /**************************************/
-
-    };
-	return std::vector<uint8_t>(data, data + sizeof(data)/sizeof(data[0]));
-}
-
-//merci Christopher A
-void	Graph::outputImage()
-{
-	std::ofstream				image("image.png");
-	std::vector<uint8_t>		data;
-	std::set<Vector2>::iterator	it = points.begin();
-	Vector2						pos;
-
-	if (!image)
-		throw std::runtime_error("cannot open image");
-	data = getPngStart(static_cast<uint32_t>(size.x), static_cast<uint32_t>(size.y));
-	for (; pos.y < size.y; ++pos.y)
-	{
-		for (pos.x = 0; pos.x < size.x; ++pos.x)
-		{
-			if (it == points.end() || pos < *it)
-				data.push_back(0xFF);
-			else
-			{
-				data.push_back(0x00);
-				++it;
-			}
-		}
-	}
-	std::vector<uint8_t>	tmp = getPngEnd();
-	data.insert(data.end(), tmp.begin(), tmp.end());
-	image.write(reinterpret_cast<const char*>(data.data()), data.size());
 }

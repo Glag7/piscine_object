@@ -30,7 +30,14 @@ int main(int argc, char **argv)
 			}
 		}
 		graph.outputConsole();
-		//graph.outputImage();
+		try
+		{
+			graph.outputImage();
+		}
+		catch (std::exception &e)
+		{
+			std::cerr << "image creation failed: " << e.what() << "\n";
+		}
 	}
 	catch (std::exception &e)
 	{

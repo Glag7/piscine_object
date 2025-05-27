@@ -8,6 +8,8 @@
 #include <fstream>
 #include <cstdlib>
 #include <iostream>
+#include <vector>
+#include <stdint.h>
 #include "Vector2.hpp"
 
 class	Graph
@@ -23,7 +25,7 @@ class	Graph
 		void	addLine(const Vector2 &start, const Vector2 &end);
 		void	readFile(const std::string &name);
 		void	outputConsole();
-//		void	outputImage();
+		void	outputImage();
 };
 
 #endif

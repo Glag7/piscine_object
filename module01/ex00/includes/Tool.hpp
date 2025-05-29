@@ -1,3 +1,6 @@
+#ifndef TOOL_HPP
+# define TOOL_HPP
+
 #include <string>
 
 class Worker;
@@ -11,8 +14,13 @@ class Tool
 		virtual void	use() = 0;
 
 	public:
-		Tool(const std::string &type);
+		Tool(const std::string &type, unsigned uses);
+
+		const std::string	&getType() const {return type;}
 
 		void			useTool();
 		void			setWorker(Worker *worker);
+		void			removeWorker();
 };
+
+#endif

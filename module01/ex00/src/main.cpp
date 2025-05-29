@@ -58,4 +58,6 @@ int main()
 	}
 	std::cout << "bob " << bob;
 	std::cout << "\n";
+	Shovel	*no = bob.getTool<Shovel>();
+	std::cout << no << "\n";
 }

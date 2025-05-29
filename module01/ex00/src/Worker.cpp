@@ -1,5 +1,6 @@
 #include "Worker.hpp"
 #include "Tool.hpp"
+#include "Workshop.hpp"
 
 Worker::Worker() :
 	pos(),
@@ -29,6 +30,11 @@ void	Worker::removeTool(Tool *tool)
 	tools.erase(pos);
 	tool->removeWorker();
 	std::cout << "Tool removed: " << tool->getType() << "\n";
+	for (std::vector<IWorkshop *>::iterator it = workshops.begin(); it < workshops.end(); ++it)
+	{
+		if ((*it)->checkWorker(this))
+			std::cout << "Worker is sad.\n";
+	}
 }
 
 void	Worker::useTool(Tool *tool)
@@ -39,6 +45,38 @@ void	Worker::useTool(Tool *tool)
 		throw std::runtime_error("tool not in inventory");
 	std::cout << "Worker using tool.\n";
 	tool->useTool();
+}
+
+void	Worker::joinWorkShop(IWorkshop *ws)
+{
+	if (ws == NULL)
+		throw std::runtime_error("null found");
+	if (std::find(workshops.begin(), workshops.end(), ws) != workshops.end())
+		throw std::runtime_error("workshop already joined");
+	try
+	{
+		ws->addWorker(this);
+		workshops.push_back(ws);
+		std::cout << "Worker joined workshop.\n";
+	}
+	catch (std::invalid_argument &e)
+	{
+		std::cout << "Worker cannot join: " << e.what() << ".\n";
+	}
+}
+
+void	Worker::leaveWorkShop(IWorkshop *ws)
+{
+	if (ws == NULL)
+		throw std::runtime_error("null found");
+
+	std::vector<IWorkshop *>::iterator pos = std::find(workshops.begin(), workshops.end(), ws);
+
+	if (pos == workshops.end())
+		throw std::runtime_error("workshop not joined");
+	workshops.erase(pos);
+	ws->removeWorker(this);
+	std::cout << "Worker left workshop.\n";
 }
 
 std::ostream	&operator<<(std::ostream &o, const Worker &w)

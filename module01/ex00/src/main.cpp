@@ -2,6 +2,7 @@
 #include "Worker.hpp"
 #include "Hammer.hpp"
 #include "Shovel.hpp"
+#include "Workshop.hpp"
 
 int main()
 {
@@ -60,4 +61,22 @@ int main()
 	std::cout << "\n";
 	Shovel	*no = bob.getTool<Shovel>();
 	std::cout << no << "\n";
+
+	Workshop<Hammer>	hamshop;
+	Workshop<Shovel>	shoshop;
+
+	std::cout << "\n";
+	bob.joinWorkShop(&shoshop);
+	bob.giveTool(&sho);
+	bob.joinWorkShop(&shoshop);
+	std::cout << "\n";
+	bob.joinWorkShop(&hamshop);
+	hamshop.executeWorkDay();
+	std::cout << "\n";
+	shoshop.executeWorkDay();
+	std::cout << "\n";
+	hamshop.executeWorkDay();
+	std::cout << "\n";
+	bob.leaveWorkShop(&shoshop);
+	shoshop.executeWorkDay();
 }

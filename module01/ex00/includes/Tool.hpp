@@ -18,9 +18,9 @@ class Tool
 
 		const std::string	&getType() const {return type;}
 
-		void			useTool();
-		void			setWorker(Worker *worker);
-		void			removeWorker();
+		void	useTool();
+		void	setWorker(Worker *worker);
+		void	removeWorker();
 };
 
 #endif

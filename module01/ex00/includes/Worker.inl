@@ -16,4 +16,11 @@ ToolType	*Worker::getTool() const
 	return nullptr;
 }
 
+template <class ToolType>
+void	Worker::work()
+{
+	std::cout << "Worker is working\n";
+	useTool(getTool<ToolType>());
+}
+
 #endif

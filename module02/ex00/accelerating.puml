@@ -1,0 +1,10 @@
+@startuml
+Bob -> Car : press gas pedal
+Car -> Motor : relay information 
+Motor -> Injector : give more fuel
+Injector -> ExplosionChamber : inject more fuel
+ExplosionChamber -> Crankshaft : explode more
+Crankshaft -> Transmission : spin faster
+Transmission -> Wheel : spin faster
+@enduml
+

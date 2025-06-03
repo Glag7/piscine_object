@@ -1,0 +1,8 @@
+@startuml
+Bob -> Car : turn steering wheel
+Car -> SteerWheel : relay information
+SteerWheel -> DAE : engage DAE
+DAE -> Direction : assist user
+Direction -> Wheel : turn wheels
+@enduml
+

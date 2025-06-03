@@ -1,0 +1,7 @@
+@startuml
+Bob -> Car : press brake pedal
+Car-> BrakeController : relay to brake controller
+BrakeController -> Brake : enable brakes
+Brake -> Wheel : press on wheels
+@enduml
+

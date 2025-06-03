@@ -1,0 +1,167 @@
+@startuml
+
+abstract class  LinkablePart
+{
+    {abstract} +execute(in p_pression : float) : void
+}
+
+class   Wheel
+{
+    +executeRotation(in p_force : float) : void
+}
+
+class   Gear
+{
+    +demultiplier : int
+}
+
+class   Singleton<GearLever>
+{
+    __hidden__
+}
+
+class   GearLever
+{
+    -gears : Gear[]
+    -level : int
+    +change() : void
+    +activeGear() : Gear*
+}
+
+Singleton <|-- GearLever 
+GearLever "1" *-- "1..*" Gear
+
+class   Transmission
+{
+    -wheels : vector<Wheel *>
+    +activate(in p_force : float) : void
+}
+
+Transmission "1" o-- "2..*" Wheel
+
+class   Crankshaft
+{
+    -transmission : Transmission*
+    +receiveForce(in p_volume : float) : void
+}
+
+Crankshaft "1" o-- "1" Transmission
+
+class   ExplosionChamber
+{
+    -crankshaft : Crankshaft*
+    +fill(in p_volume : float) : void
+}
+
+ExplosionChamber "1..*" o-- "1" Crankshaft
+
+class   Injector
+{
+    -chamber : ExplosionChamber*
+    +execute(in float p_pression) : void
+}
+
+Injector "1" o-- "1" ExplosionChamber
+LinkablePart <|-- Injector
+
+class   Motor
+{
+    -injector : Injector
+    -chamber : ExplosionChamber
+    -crankshaft : Crankshaft
+    +connectToTransmission(inout p_transmission : Transmission*) : void
+}
+
+Motor "1" *-- "1..*" Injector
+Motor "1" *-- "1..*" ExplosionChamber
+Motor "1" *-- "1" Crankshaft
+Motor --> Transmission
+
+class   Pedal
+{
+    -part : LinkablePart*
+    +setTarget(in p_part : LinkablePart*) : void
+    +use(in p_pression : float) : void
+}
+
+Pedal "1" o-- "1" LinkablePart
+
+class   Direction
+{
+    -wheels : Wheel[]
+    +turn(in p_angle : float) : void
+}
+
+Direction "1" o-- "2..*" Wheel
+
+class   DAE
+{
+    -direction : Direction*
+    -force : float
+    +use(in p_angle : float) : void
+}
+
+DAE "1" o-- "1" Direction
+
+class   SteerWheel
+{
+    -dae : DAE*
+    +turn(in p_angle : float) : void
+}
+
+SteerWheel "1" o-- "1" DAE
+
+class   Brake
+{
+    -wheel : Wheel*
+    +execute(in p_force : float) : void
+    +attachWheel(in p_wheel : Wheel*) : void
+}
+
+Brake "1" o-- "1" Wheel
+
+class   BrakeController
+{
+    -brakes : Brake[]
+    +execute(in p_pression : float) : void
+}
+
+BrakeController "1" o-- "1..*" Brake
+LinkablePart <|-- BrakeController
+
+class   Cockpit
+{
+    -pedal : Pedal
+    -steerWheel : SteerWheel
+    -gearLever : GearLever
+}
+
+Cockpit "1" *-- "1..*" Pedal
+Cockpit "1" *-- "1" SteerWheel
+Cockpit "1" *-- "1" GearLever
+
+class   Electronics
+{
+    +dae : DAE
+}
+
+Electronics "1" *-- "1" DAE
+
+class   Car
+{
+    -brakes : BrakeController
+    -direction : Direction
+    -transmission : Transmission
+    -motor: Motor
+    -electronics : Electronics
+    -cockpit : Cockpit
+}
+
+Car "1" *-- "1" BrakeController
+Car "1" *-- "1" Direction
+Car "1" *-- "1" Transmission
+Car "1" *-- "1" Motor
+Car "1" *-- "1" Electronics
+Car "1" *-- "1" Cockpit
+
+@enduml

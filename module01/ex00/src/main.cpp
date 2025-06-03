@@ -69,6 +69,8 @@ int main()
 	bob.joinWorkShop(&shoshop);
 	bob.giveTool(&sho);
 	bob.joinWorkShop(&shoshop);
+	bob.leaveWorkShop(&shoshop);
+	bob.joinWorkShop(&shoshop);
 	std::cout << "\n";
 	bob.joinWorkShop(&hamshop);
 	hamshop.executeWorkDay();

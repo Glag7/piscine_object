@@ -1,6 +1,6 @@
 #include "Shovel.hpp"
 
-Shovel::Shovel() : Tool("Shovel", 3)
+Shovel::Shovel() : Tool("shovel", 3)
 {
 	std::cout << "Shovel constructor.\n";
 }

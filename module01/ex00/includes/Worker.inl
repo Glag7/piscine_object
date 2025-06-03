@@ -19,7 +19,7 @@ ToolType	*Worker::getTool() const
 template <class ToolType>
 void	Worker::work()
 {
-	std::cout << "Worker is working\n";
+	std::cout << "Worker is working.\n";
 	useTool(getTool<ToolType>());
 }
 

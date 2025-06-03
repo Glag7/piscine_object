@@ -13,7 +13,7 @@ void	Worker::giveTool(Tool *tool)
 {
 	if (tool == NULL)
 		throw std::runtime_error("null found");
-	std::cout << "Giving tool " << tool->getType() << "\n";
+	std::cout << "Giving tool " << tool->getType() << ".\n";
 	tool->setWorker(this);
 	tools.push_back(tool);
 }
@@ -29,7 +29,7 @@ void	Worker::removeTool(Tool *tool)
 		throw std::runtime_error("tool not in inventory");
 	tools.erase(pos);
 	tool->removeWorker();
-	std::cout << "Tool removed: " << tool->getType() << "\n";
+	std::cout << "Tool removed: " << tool->getType() << ".\n";
 	for (std::vector<IWorkshop *>::iterator it = workshops.begin(); it < workshops.end(); ++it)
 	{
 		if ((*it)->checkWorker(this))

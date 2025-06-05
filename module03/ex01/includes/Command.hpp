@@ -19,6 +19,7 @@ class Command
 
 	public:
 		Command(const std::string &client);
+		virtual ~Command() {}
 
 		void				addArticle(const Article &a);
 		void				addArticle(const Article &a, unsigned n);

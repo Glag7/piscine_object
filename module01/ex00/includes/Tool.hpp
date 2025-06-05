@@ -15,6 +15,7 @@ class Tool
 
 	public:
 		Tool(const std::string &type, unsigned uses);
+		virtual ~Tool() {}
 
 		const std::string	&getType() const {return type;}
 

@@ -11,6 +11,8 @@ class IWorkshop
 		std::vector<Worker *>	workers;
 
 	public:
+		virtual ~IWorkshop() {}
+
 		virtual void	addWorker(Worker *w) = 0;
 		virtual void	removeWorker(Worker *w) = 0;
 		virtual bool	checkWorker(Worker *w) = 0;

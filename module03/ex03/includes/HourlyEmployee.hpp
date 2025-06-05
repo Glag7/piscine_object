@@ -4,10 +4,9 @@
 class HourlyEmployee 
 {
 	public:
-		HourlyEmployee();
-		virtual	~HourlyEmployee();
+		virtual	~HourlyEmployee() {}
 
-		void	addWorkedHours(unsigned hours) = 0;
+		virtual void	addWorkedHours(unsigned hours) = 0;
 };
 
 #endif

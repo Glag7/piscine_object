@@ -1,13 +1,13 @@
 #include "ContractEmployee.hpp"
 		
 ContractEmployee::ContractEmployee(const std::string &name, unsigned n) : Employee(name, n),
-	unWorkedHours(0)
+	unworkedHours(0)
 {
 }
 
 void	ContractEmployee::addUnworkedHours(unsigned hours)
 {
-	unWorkedHours += hours;
+	unworkedHours += hours;
 }
 
 unsigned	ContractEmployee::executeWorkDay()

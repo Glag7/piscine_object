@@ -7,12 +7,12 @@
 class ContractEmployee : public Employee, public SalariedEmployee
 {
 	private:
-		unsigned	unWorkedHours;
+		unsigned	unworkedHours;
 
 	public:
 		ContractEmployee(const std::string &name, unsigned n);
 
-		void		addUnworkedHours(unsigned hours);	
+		void		addUnworkedHours(unsigned hours);
 		unsigned	executeWorkDay();
 };
 

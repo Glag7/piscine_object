@@ -1,5 +1,6 @@
 #include <iostream>
 #include "EmployeeManager.hpp"
+#include "Employee.hpp"
 
 EmployeeManager::EmployeeManager()
 {
@@ -20,15 +21,12 @@ void	EmployeeManager::removeEmployee(Employee *e)
 
 void	EmployeeManager::executeWorkDay()
 {
-	for (auto it : employees)
-	{
-		std::cout << it->first->getName() << "is working\n";
-		it->second += it->first->executeWorkDay();
-	}
+	for (auto &it : employees)
+		it.second += it.first->executeWorkDay();
 }
 
 void	EmployeeManager::calculatePayroll()
 {
 	for (auto it : employees)
-		std::cout << it->first->getName() << " gets paid " << it->second << "\n";
+		std::cout << it.first->getName() << " gets paid " << it.second << "\n";
 }

@@ -5,16 +5,21 @@
 
 class Employee
 {
-	private:
+	protected:
 		static unsigned	globalId;
 
 		unsigned	id;
-		unsigned	hourlyValue;
 		std::string	name;
+		unsigned	hourlyValue;
 
 	public:
-		Employee(const std::String &name, unsigned n);
-		virtual ~Employee {}
+		Employee(const std::string &name, unsigned n);
+		bool	operator==(const Employee &e);
+		bool	operator<(const Employee &e);
+		bool	operator>(const Employee &e);
+		virtual ~Employee() {}
+
+		const std::string	&getName() {return name;}
 
 		virtual unsigned	executeWorkDay() = 0;
 };

@@ -4,10 +4,9 @@
 class SalariedEmployee
 {
 	public:
-		SalariedEmployee();
-		virtual	~SalariedEmployee();
+		virtual	~SalariedEmployee() {}
 
-		void	addUnworkedHours(unsigned hours) = 0;
+		virtual void	addUnworkedHours(unsigned hours) = 0;
 };
 
 #endif

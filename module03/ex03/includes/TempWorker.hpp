@@ -12,7 +12,7 @@ class TempWorker : public Employee, public HourlyEmployee
 	public:
 		TempWorker(const std::string &name, unsigned n);
 
-		void		addWorkedHours(unsigned hours);	
+		void		addWorkedHours(unsigned hours);
 		unsigned	executeWorkDay();
 };
 

@@ -1,6 +1,6 @@
 #include "TempWorker.hpp"
 
-TempWorker(const std::string &name, unsigned n) : Employee(name, n),
+TempWorker::TempWorker(const std::string &name, unsigned n) : Employee(name, n),
 	workedHours(0)
 {
 }

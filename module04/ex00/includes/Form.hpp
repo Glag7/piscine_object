@@ -3,9 +3,9 @@
 
 enum class FormType
 {
-	CourseFinished
-	NeedMoreClassroom
-	NeedCourseCreation
+	CourseFinished,
+	NeedMoreClassroom,
+	NeedCourseCreation,
 	SubscriptionToCourse
 };
 

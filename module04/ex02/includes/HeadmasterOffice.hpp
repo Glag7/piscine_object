@@ -3,12 +3,14 @@
 
 #include "Room.hpp"
 
+class Person;
+
 class HeadmasterOffice : public Room
 {
-	private:
-
 	public:
+		HeadmasterOffice();
 
+		bool	canEnter(Person* p);
 };
 
 #endif

@@ -1,7 +1,7 @@
 #ifndef ROOM_HPP
 # define ROOM_HPP
 
-#include <vector>
+#include <set>
 
 class Person;
 
@@ -10,18 +10,19 @@ class Room
 	private:
 		static long long	globalId;
 
-		long long				id;
-		std::vector<Person*>	_occupants;
+		long long			id;
+		std::set<Person *>	people;
 
 	public:
 		Room();
+		virtual ~Room() {}
 
-		long long	getId() {return id;}
+		long long	getId() const {return id;}
 
-		bool	canEnter(Person* p);
-		void	enter(Person* p);
-		void	exit(Person* p);
-		void	printOccupant();
+		virtual bool	canEnter(Person* p) = 0;
+		void			enter(Person* p);
+		void			exit(Person* p);
+		void			printOccupants();
 };
 
 

@@ -2,28 +2,29 @@
 # define COURSE_HPP
 
 #include <string>
-#include <vector>
+#include <set>
 
 class Student;
 class Professor;
+class Classroom;
 
 class Course
 {
 	private:
-		std::string				_name;
-		Professor*				_responsable;
-		std::vector<Student*>	_students;
-		int						_numberOfClassToGraduate;
-		int						_maximumNumberOfStudent;
-		//donner classroom
+		std::string			name;
+		Professor*			responsable;
+		std::set<Student*>	students;
+		Classroom			*classroom;
 
 	public:
 		Course(const std::string &name);
 		
-		const std::string	&getName() {return _name;}
+		const std::string	&getName() const {return name;}
+		Classroom			*getRoom() const {return classroom;}
 
 		void	assign(Professor* professor);
-		void	subscribe(Student* student) {_students.push_back(student);}
+		void	subscribe(Student* student);
+		void	setClassroom(Classroom *c);
 };
 
 #endif

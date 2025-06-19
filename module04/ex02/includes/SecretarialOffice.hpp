@@ -1,16 +1,22 @@
 #ifndef SECRETARIALOFFICE_HPP
 # define SECRETARIALOFFICE_HPP
 
-#include <vector>
+#include <set>
 #include "Room.hpp"
+
+class Form;
 
 class SecretarialOffice: public Room
 {
 	private:
-		std::vector<Form*> _archivedForms;
+		std::set<Form *>	archivedForms;
 
 	public:
+		SecretarialOffice();
+		~SecretarialOffice();
 
+		bool	canEnter(Person* p);
+		void	addForm(Form *f);
 };
 
 #endif

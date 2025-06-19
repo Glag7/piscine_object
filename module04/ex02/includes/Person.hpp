@@ -7,17 +7,19 @@ class Room;
 
 class Person
 {
-	private:
-		std::string	_name;
-		Room*		_currentRoom;
+	protected:
+		std::string	name;
+		Room*		currentRoom;
 
 	public:
-		Person(const std::string &name) : _name(name) {}
+		Person(const std::string &name);
+		virtual ~Person() {}
 
-		const std::string	&getName() {return _name;}
+		const std::string	&getName() const {return name;}
+		const Room			*getRoom() const {return currentRoom;}
 
-		const Room*	room() {return _currentRoom;}
+		void	exitRoom();
+		void	changeRoom(Room *r);
 };
-
 
 #endif

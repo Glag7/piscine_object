@@ -1,17 +1,20 @@
 #ifndef PROFESSOR_HPP
 # define PROFESSOR_HPP
 
-#include "Staff.hpp"
+#include <string>
+#include "Person.hpp"
 
 class Course;
 
-class Professor : public Staff
+class Professor : public Person
 {
 	private:
-		Course*	_currentCourse;
+		Course	*currentCourse;
 
 	public:
-		void	assignCourse(Course* p_course);
+		Professor(const std::string &s);
+
+		void	assignCourse(Course* course);
 		void	doClass();
 		void	closeCourse();
 };

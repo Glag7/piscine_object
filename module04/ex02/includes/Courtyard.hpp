@@ -1,12 +1,16 @@
 #ifndef COURTYARD_HPP
 # define COURTYARD_HPP
 
+#include "Room.hpp"
+
+class Person;
+
 class Courtyard : public Room
 {
-	private:
-
 	public:
-
+		Courtyard();
+		
+		bool	canEnter(Person* p);
 };
 
 #endif

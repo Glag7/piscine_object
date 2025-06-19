@@ -1,9 +1,12 @@
 #include <iostream>
+#include <stdexcept>
 #include "Headmaster.hpp"
+#include "HeadmasterOffice.hpp"
 #include "Form.hpp"
 
 Headmaster::Headmaster() : Person("headmaster")
 {
+	std::cout << "Headmaster created\n";
 }
 
 void Headmaster::receiveForm(Form* form)
@@ -14,6 +17,10 @@ void Headmaster::receiveForm(Form* form)
 
 void	Headmaster::signForm(Form *form)
 {
+	if (dynamic_cast<HeadmasterOffice *>(currentRoom) == nullptr)
+	{
+		throw std::logic_error("couldn't sign form outside office");
+	}
 	try
 	{
 		form->sign(Form::FormAccess());
@@ -24,7 +31,7 @@ void	Headmaster::signForm(Form *form)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << "Headmaster unable to sign form : " << e.what() << "\n";
+		std::cout << "Headmaster was unable to sign form : " << e.what() << "\n";
 	}
 }
 
@@ -32,7 +39,6 @@ void	Headmaster::signAllForms()
 {
 	auto	it = formsToSign.begin();
 
-	std::cout << "Headmaster signing all forms\n";
 	while (it != formsToSign.end())
 	{
 		Form	*form = *it;

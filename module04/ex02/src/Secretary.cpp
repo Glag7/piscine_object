@@ -2,25 +2,40 @@
 #include <stdexcept>
 #include "Forms.hpp"
 #include "Secretary.hpp"
+#include "SecretarialOffice.hpp"
 
 Secretary::Secretary() : Person("secretary")
 {
+	std::cout << "Secretary created\n";
 }
 
 Form*	Secretary::createForm(FormType formType)
 {
-	std::cout << "Secretary creating form\n";
+	if (dynamic_cast<SecretarialOffice *>(currentRoom) == nullptr)
+	{
+		throw std::logic_error("couldn't create form outside office");
+	}
+
+	Form	*form;
+
 	switch (formType)
 	{
 		case FormType::NeedMoreClassroom:
-			return new NeedMoreClassroomForm;
+			form = new NeedMoreClassroomForm;
+			break;
 		case FormType::CourseFinished:
-			return new CourseFinishedForm;
+			form = new CourseFinishedForm;
+			break;
 		case FormType::NeedCourseCreation:
-			return new NeedCourseCreationForm;
+			form = new NeedCourseCreationForm;
+			break;
 		case FormType::SubscriptionToCourse:
-			return new SubscriptionToCourseForm;
+			form = new SubscriptionToCourseForm;
+			break;
 		default:
 			throw std::invalid_argument("unknown form");
 	}
+	std::cout << "Secretary created form\n";
+	dynamic_cast<SecretarialOffice *>(currentRoom)->addForm(form);
+	return form;
 }

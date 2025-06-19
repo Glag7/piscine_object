@@ -4,6 +4,7 @@
 #include "Room.hpp"
 
 class Course;
+class Person;
 
 class Classroom : public Room
 {
@@ -11,9 +12,10 @@ class Classroom : public Room
 		Course	*currentCourse;
 
 	public:
-		Classroom() : Room() {}
+		Classroom();
 
-		void	assignCourse(Course* course) {currentCourse = course;}
+		bool	canEnter(Person* p);
+		void	assignCourse(Course* course);
 };
 
 #endif

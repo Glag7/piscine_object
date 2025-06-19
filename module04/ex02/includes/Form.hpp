@@ -24,6 +24,7 @@ class Form
 
 	public:
 		Form(FormType formType);
+		virtual ~Form() {}
 
 		FormType	getFormType() const {return _formType;}
 

@@ -2,16 +2,18 @@
 # define HEADMASTER_HPP
 
 #include <set>
-#include "Staff.hpp"
+#include "Person.hpp"
 
 class Form;
 
-class Headmaster : public Staff
+class Headmaster : public Person
 {
 	private:
 		std::set<Form *>	formsToSign;
 		
 	public:
+		Headmaster();
+
 		void	receiveForm(Form* form);
 		void	signForm(Form *form);
 		void	signAllForms();

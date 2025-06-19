@@ -1,14 +1,16 @@
 #ifndef SECRETARY_HPP
 # define SECRETARY_HPP
 
-#include "Staff.hpp" 
+#include "Person.hpp" 
 #include "Form.hpp"
 
-class Secretary : public Staff
+class Secretary : public Person
 {
 	private:
 
 	public:
+		Secretary();
+
 		Form*	createForm(FormType formType);
 };
 

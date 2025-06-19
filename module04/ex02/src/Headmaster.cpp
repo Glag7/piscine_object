@@ -2,6 +2,10 @@
 #include "Headmaster.hpp"
 #include "Form.hpp"
 
+Headmaster::Headmaster() : Person("headmaster")
+{
+}
+
 void Headmaster::receiveForm(Form* form)
 {
 	std::cout << "Headmaster received form\n";

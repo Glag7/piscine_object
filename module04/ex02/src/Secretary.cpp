@@ -3,6 +3,10 @@
 #include "Forms.hpp"
 #include "Secretary.hpp"
 
+Secretary::Secretary() : Person("secretary")
+{
+}
+
 Form*	Secretary::createForm(FormType formType)
 {
 	std::cout << "Secretary creating form\n";

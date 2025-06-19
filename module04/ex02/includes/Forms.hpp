@@ -8,7 +8,7 @@ class Course;
 class Student;
 class Classroom;
 
-class CourseFinishedForm : public Form
+class CourseFinishedForm : public Form//c'est quand un student finit une course
 {
 	private:
 		Course		*course;
@@ -27,8 +27,7 @@ class NeedCourseCreationForm : public Form
 		std::string	name;
 		Classroom	*classroom;
 
-		void	_execute();//creer course mettre dans classroom
-		//name et classroom
+		void	_execute();
 
 	public:
 		NeedCourseCreationForm();

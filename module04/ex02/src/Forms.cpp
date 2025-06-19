@@ -1,4 +1,3 @@
-#include <set>
 #include <stdexcept>
 #include <iostream>
 #include "Forms.hpp"
@@ -9,27 +8,24 @@
 
 CourseFinishedForm::CourseFinishedForm() :
 	Form(FormType::CourseFinished),
-	course(0)
+	course(nullptr),
+	student(nullptr)
 {
-	std::cout << "Creating course finished form\n";
+	std::cout << "Created course finished form\n";
 }
 
 void	CourseFinishedForm::_execute()
 {
-	std::set<Course *>	&courseList = SSet<Course *>::getInstance();
-	auto				it = courseList.find(course);
-
-	if (it == courseList.end())
-		throw std::logic_error("...");
-	courseList.erase(it);
-	delete course;
+	std::cout << "Executed course finished form\n";
+	std::cout << "course " << course->getName() << " student " << student->getName() << "\n";
 }
 
-void	CourseFinishedForm::setCourse(Course *c)
+void	CourseFinishedForm::fill(Course *c, Student *s)
 {
-	if (c == NULL)
+	if (c == NULL || s == NULL)
 		throw std::logic_error("...");
 	course = c;
+	student = s;
 	isFilled = true;
 }
 
@@ -40,27 +36,21 @@ NeedCourseCreationForm::NeedCourseCreationForm() :
 	name(""),
 	classroom(0)
 {
-	std::cout << "Creating need course creation form\n";
+	std::cout << "Created need course creation form\n";
 }
 
-void	NeedCourseCreationForm::setClassroom(Classroom *c)
+void	NeedCourseCreationForm::fill(Classroom *c, const std::string &s)
 {
-	if (c == NULL)
+	if (c == NULL || s == "")
 		throw std::logic_error("...");
 	classroom = c;
-	isFilled = name != "";
-}
-
-void	NeedCourseCreationForm::setName(const std::string &s)
-{
-	if (s == "")
-		throw std::logic_error("...");
 	name = s;
-	isFilled = classroom != NULL;
+	isFilled = true;
 }
 
 void	NeedCourseCreationForm::_execute()
 {
+	std::cout << "Executed need course creation form\n";
 	Course	*c = new Course(name);
 
 	classroom->assignCourse(c);
@@ -72,11 +62,12 @@ void	NeedCourseCreationForm::_execute()
 NeedMoreClassroomForm::NeedMoreClassroomForm() : Form(FormType::NeedMoreClassroom)
 {
 	isFilled = true;
-	std::cout << "Creating need more classrooms form\n";
+	std::cout << "Created need more classrooms form\n";
 }
 
 void	NeedMoreClassroomForm::_execute()
 {
+	std::cout << "Executed need more classroom form\n";
 	SSet<Room *>::getInstance().insert(new Classroom);
 }
 
@@ -87,27 +78,20 @@ SubscriptionToCourseForm::SubscriptionToCourseForm() :
 	course(0),
 	student(0)
 {
-	std::cout << "Creating subscription to course form\n";
+	std::cout << "Created subscription to course form\n";
 }
 
-void	SubscriptionToCourseForm::setCourse(Course *c)
+void	SubscriptionToCourseForm::fill(Course *c, Student *s)
 {
-	if (c == NULL)
+	if (c == NULL || s == NULL)
 		throw std::logic_error("...");
 	course = c;
-	isFilled = student != NULL;
-}
-
-void	SubscriptionToCourseForm::setStudent(Student *c)
-{
-	if (c == NULL)
-		throw std::logic_error("...");
-	student = c;
-	isFilled = course != NULL;
+	student = s;
+	isFilled = true;
 }
 
 void	SubscriptionToCourseForm::_execute()
 {
-	course->subscribe(student);
+	std::cout << "Executed subscription to course form\n";
 	student->addCourse(course);
 }

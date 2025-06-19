@@ -20,14 +20,14 @@ void	Person::exitRoom()
 
 void	Person::changeRoom(Room *r)
 {
-	exitRoom();
-	if (r == nullptr)
-		return;
-	if (!r->canEnter(this))
+	if (r != nullptr && !r->canEnter(this))
 	{
 		std::cout << name << " couldn't enter room " << r->getId() << "\n";
 		return;
 	}
+	exitRoom();
+	if (r == nullptr)
+		return;
 	std::cout << name << " entered room " << r->getId() << "\n";
 	r->enter(this);
 	currentRoom = r;

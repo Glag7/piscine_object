@@ -8,17 +8,18 @@ class Course;
 class Student;
 class Classroom;
 
-class CourseFinishedForm : public Form//c'est quand un student finit une course
+class CourseFinishedForm : public Form
 {
 	private:
 		Course		*course;
+		Student		*student;
 		
 		void	_execute();
 
 	public:
 		CourseFinishedForm();
 
-		void	setCourse(Course *c);
+		void	fill(Course *c, Student *s);
 };
 
 class NeedCourseCreationForm : public Form
@@ -32,8 +33,7 @@ class NeedCourseCreationForm : public Form
 	public:
 		NeedCourseCreationForm();
 
-		void	setClassroom(Classroom *c);
-		void	setName(const std::string &s);
+		void	fill(Classroom *c, const std::string &s);
 };
 
 class NeedMoreClassroomForm : public Form
@@ -55,8 +55,7 @@ class SubscriptionToCourseForm : public Form
 
 	public:
 		SubscriptionToCourseForm();
-		void	setCourse(Course *c);
-		void	setStudent(Student *c);
+		void	fill(Course *c, Student *s);
 };
 
 #endif

@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <iostream>
 #include "Form.hpp"
 #include "Headmaster.hpp"
 
@@ -7,23 +8,19 @@ Form::Form(FormType formType) :
 	isSigned(false),
 	isFilled(false)
 {
-}
-
-void	Form::sign()
-{
-	isSigned = true;
+	std::cout << "creating form\n";
 }
 
 void	Form::sign(FormAccess)
 {
 	if (isFilled)
-		sign();
+		isSigned = true;
 	throw std::runtime_error("form not filled");
 }
 
-void	Form::execute(FormAccess)
+void	Form::execute()
 {
 	if (isSigned)
-		execute();
+		_execute();
 	throw std::runtime_error("form not signed");
 }

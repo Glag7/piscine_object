@@ -15,6 +15,7 @@ class Course
 		std::vector<Student*>	_students;
 		int						_numberOfClassToGraduate;
 		int						_maximumNumberOfStudent;
+		//donner classroom
 
 	public:
 		Course(const std::string &name);
@@ -22,7 +23,7 @@ class Course
 		const std::string	&getName() {return _name;}
 
 		void	assign(Professor* professor);
-		void	subscribe(Student* student);
+		void	subscribe(Student* student) {_students.push_back(student);}
 };
 
 #endif

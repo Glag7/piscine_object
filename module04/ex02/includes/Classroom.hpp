@@ -8,12 +8,12 @@ class Course;
 class Classroom : public Room
 {
 	private:
-		Course*	_currentRoom;
+		Course	*currentCourse;
 
 	public:
 		Classroom() : Room() {}
 
-		void	assignCourse(Course* course);
+		void	assignCourse(Course* course) {currentCourse = course;}
 };
 
 #endif

@@ -1,7 +1,7 @@
 #ifndef HEADMASTER_HPP
 # define HEADMASTER_HPP
 
-#include <vector>
+#include <set>
 #include "Staff.hpp"
 
 class Form;
@@ -9,10 +9,12 @@ class Form;
 class Headmaster : public Staff
 {
 	private:
-		std::vector<Form*>	_formToValidate;
+		std::set<Form *>	formsToSign;
 		
 	public:
-		void receiveForm(Form* form);
+		void	receiveForm(Form* form);
+		void	signForm(Form *form);
+		void	signAllForms();
 };
 
 

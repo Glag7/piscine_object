@@ -16,10 +16,11 @@ class Form
 	private:
 		FormType	_formType;
 		bool		isSigned;
+	
+	protected:
 		bool		isFilled;
 		
-		void			sign();
-		virtual void	execute() = 0;
+		virtual void	_execute() = 0;
 
 	public:
 		Form(FormType formType);
@@ -34,7 +35,7 @@ class Form
 		};
 
 		void	sign(FormAccess);
-		void	execute(FormAccess);
+		void	execute();
 };
 
 

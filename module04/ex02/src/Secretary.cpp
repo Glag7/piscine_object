@@ -5,6 +5,7 @@
 
 Form*	Secretary::createForm(FormType formType)
 {
+	std::cout << "Secretary creating form\n";
 	switch (formType)
 	{
 		case FormType::NeedMoreClassroom:

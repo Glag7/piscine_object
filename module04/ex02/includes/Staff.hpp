@@ -11,8 +11,6 @@ class Staff : public Person
 
 	public:
 		Staff(const std::string &name) : Person(name) {}
-
-		void	sign(Form* form);
 };
 
 #endif

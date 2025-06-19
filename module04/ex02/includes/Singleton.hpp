@@ -1,7 +1,7 @@
 #ifndef SINGLETON_HPP
 # define SINGLETON_HPP
 
-#include <vector>
+#include <set>
 
 template <class T>
 class Singleton
@@ -23,6 +23,6 @@ class Singleton
 };
 
 template <class T>	
-using SVector = Singleton<std::vector<T>>;
+using SSet = Singleton<std::set<T>>;
 
 #endif

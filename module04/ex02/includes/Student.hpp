@@ -18,6 +18,7 @@ class Student : public Person
 		void	attendClass(Classroom* classroom);
 		void	exitClass();
 		void	graduate(Course* course);
+		void	addCourse(Course* course) {_subscribedCourse.push_back(course);}
 };
 
 

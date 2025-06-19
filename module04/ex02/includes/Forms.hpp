@@ -4,13 +4,16 @@
 #include <string>
 #include "Form.hpp"
 
+class Course;
+class Student;
+class Classroom;
+
 class CourseFinishedForm : public Form
 {
 	private:
-		Course	*course;
+		Course		*course;
 		
-		void	execute();//supprimer de la classroom
-		//enlever du singleton
+		void	_execute();
 
 	public:
 		CourseFinishedForm();
@@ -21,29 +24,40 @@ class CourseFinishedForm : public Form
 class NeedCourseCreationForm : public Form
 {
 	private:
-		void	execute();//creer course mettre dans classroom
+		std::string	name;
+		Classroom	*classroom;
+
+		void	_execute();//creer course mettre dans classroom
 		//name et classroom
 
 	public:
-		NeedCourseCreationForm() : Form(FormType::NeedCourseCreation) {}
+		NeedCourseCreationForm();
+
+		void	setClassroom(Classroom *c);
+		void	setName(const std::string &s);
 };
 
 class NeedMoreClassroomForm : public Form
 {
 	private:
-		void	execute();
+		void	_execute();
 
 	public:
-		NeedMoreClassroomForm() : Form(FormType::NeedMoreClassroom) {}
+		NeedMoreClassroomForm();
 };
 
 class SubscriptionToCourseForm : public Form
 {
 	private:
-		void	execute();
+		Course	*course;
+		Student	*student;
+
+		void	_execute();
 
 	public:
-		SubscriptionToCourseForm() : Form(FormType::SubscriptionToCourse) {}
+		SubscriptionToCourseForm();
+		void	setCourse(Course *c);
+		void	setStudent(Student *c);
 };
 
 #endif

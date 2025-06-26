@@ -5,7 +5,8 @@
 
 enum class Event
 {
-	RingBell
+	StartPause,
+	EndPause
 };
 
 class Observer;

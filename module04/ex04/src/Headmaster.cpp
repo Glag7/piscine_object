@@ -7,7 +7,9 @@
 #include "Student.hpp"
 #include "Singleton.hpp"
 
-Headmaster::Headmaster() : Person("headmaster")
+Headmaster::Headmaster() :
+	Person("headmaster"),
+	bell(Singleton<Bell>::getInstance())
 {
 	std::cout << "Headmaster created\n";
 }

@@ -8,6 +8,7 @@
 #include "Form.hpp"
 #include "Forms.hpp"
 #include "Headmaster.hpp"
+#include "Courtyard.hpp"
 
 Student::Student(const std::string& name) :
 	Person(name),
@@ -18,6 +19,11 @@ Student::Student(const std::string& name) :
 
 void	Student::findClass()
 {
+	if (dynamic_cast<Courtyard *>(currentRoom) != nullptr)
+	{
+		std::cout << "Student " << name << " was in courtyard\n";
+		return;
+	}
 	if (subscribedCourses.size() != 0)
 		return;
 	std::cout << "Student " << name << " without courses\n";
@@ -38,6 +44,11 @@ void	Student::attendClass(Classroom* classroom)
 {
 	if (classroom == nullptr)
 		throw std::logic_error("...");
+	if (dynamic_cast<Courtyard *>(currentRoom) != nullptr)
+	{
+		std::cout << "Student " << name << " was in courtyard\n";
+		return;
+	}
 	changeRoom(classroom);
 }
 
@@ -80,6 +91,23 @@ void	Student::addCourse(Course* course)
 
 void	Student::receive(Event e)
 {
-	if (e == Event::RingBell)
-		std::cout << "wow\n";
+	std::cout << "Student " << name << " heard bell ring\n";
+	switch (e)
+	{
+		case Event::StartPause:
+			std::cout << "Student " << name << " starting pause\n";
+			for (Room *r : SSet<Room *>::getInstance())
+			{
+				if (dynamic_cast<Courtyard *>(r) != nullptr)
+				{
+					changeRoom(r);
+					break;
+				}
+			}
+			break;
+		case Event::EndPause:
+			std::cout << "Student " << name << " ending pause\n";
+			exitRoom();
+			break;
+	}
 }

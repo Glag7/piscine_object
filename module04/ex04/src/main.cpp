@@ -12,10 +12,11 @@
 #include "SecretarialOffice.hpp"
 #include "HeadmasterOffice.hpp"
 #include "Bell.hpp"
+#include "Courtyard.hpp"
+#include "StaffRestroom.hpp"
 
 int main()
 {
-	Bell					&bell = Singleton<Bell>::getInstance();
 	Headmaster				&headmaster = Singleton<Headmaster>::getInstance();
 	Secretary				&secretary = Singleton<Secretary>::getInstance();
 	std::set<Student *>		&studentList = SSet<Student *>::getInstance();
@@ -30,6 +31,8 @@ int main()
 		headmaster.changeRoom(r);
 		secretary.changeRoom(r);
 	}
+	roomList.insert(new Courtyard);
+	roomList.insert(new StaffRestroom);
 	studentList.insert(new Student("s1"));
 	studentList.insert(new Student("s2"));
 	studentList.insert(new Student("s3"));
@@ -39,7 +42,9 @@ int main()
 
 	headmaster.attendClasses();
 	std::cout << "\n";
-	bell.notify(Event::RingBell);
+	headmaster.notify(Event::StartPause);
+	headmaster.attendClasses();
+	headmaster.notify(Event::EndPause);
 	std::cout << "\n";
 	headmaster.attendClasses();
 	std::cout << "\n";

@@ -8,6 +8,7 @@
 #include "Forms.hpp"
 #include "Form.hpp"
 #include "Student.hpp"
+#include "StaffRestroom.hpp"
 
 Professor::Professor(const std::string &s) :
 	Person(s),
@@ -58,6 +59,11 @@ void	Professor::findRoom()
 
 void	Professor::doClass()
 {
+	if (dynamic_cast<StaffRestroom *>(currentRoom) != nullptr)
+	{
+		std::cout << "Professor " << name << " was in restroom\n";
+		return;
+	}
 	if (currentCourse == nullptr)
 		findClass();
 	if (currentCourse == nullptr)
@@ -100,6 +106,23 @@ void	Professor::doClass()
 
 void	Professor::receive(Event e)
 {
-	if (e == Event::RingBell)
-		std::cout << "aaa\n";
+	std::cout << "Professor " << name << " heard bell ring\n";
+	switch (e)
+	{
+		case Event::StartPause:
+			std::cout << "Professor " << name << " starting pause\n";
+			for (Room *r : SSet<Room *>::getInstance())
+			{
+				if (dynamic_cast<StaffRestroom *>(r) != nullptr)
+				{
+					changeRoom(r);
+					break;
+				}
+			}
+			break;
+		case Event::EndPause:
+			std::cout << "Professor " << name << " ending pause\n";
+			exitRoom();
+			break;
+	}
 }

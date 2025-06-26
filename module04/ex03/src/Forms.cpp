@@ -18,6 +18,7 @@ void	CourseFinishedForm::_execute()
 {
 	std::cout << "Executed course finished form\n";
 	student->graduate(course);
+	course->unsubscribe(student);
 }
 
 void	CourseFinishedForm::fill(Course *c, Student *s)

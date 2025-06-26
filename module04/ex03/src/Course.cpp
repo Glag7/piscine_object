@@ -26,6 +26,16 @@ void	Course::subscribe(Student* student)
 	students.insert(student);
 }
 
+void	Course::unsubscribe(Student* student)
+{
+	auto it = students.find(student);
+
+	if (it == students.end())
+		throw std::logic_error("...");
+	std::cout << "Course " << name << " was left by student " << student->getName() << "\n";
+	students.erase(it);
+}
+
 void	Course::moveStudents(Classroom *c)
 {
 	for (Student *s : students)

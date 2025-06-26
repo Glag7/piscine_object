@@ -80,15 +80,19 @@ void	Professor::doClass()
 	}
 	currentCourse->moveStudents(dynamic_cast<Classroom *>(currentRoom));
 	std::cout << "Professor " << name << " taught course " << currentCourse->getName() << "\n";
+	
+	std::set<Student *>	grad;
 	for (Student *s : currentCourse->getStudents())
 	{
 		if (s->doCourse(currentCourse))
-		{
-			std::cout << "Professor " << name << " graduated student " << s->getName() << " on course " << currentCourse->getName() << "\n";
-			CourseFinishedForm	*form = dynamic_cast<CourseFinishedForm *>(Singleton<Secretary>::getInstance().createForm(FormType::CourseFinished));
-			form->fill(currentCourse, s);
-			Singleton<Headmaster>::getInstance().signForm(form);
-			form->execute();
-		}
+			grad.insert(s);
+	}
+	for (Student *s : grad)
+	{
+		std::cout << "Professor " << name << " graduated student " << s->getName() << " on course " << currentCourse->getName() << "\n";
+		CourseFinishedForm	*form = dynamic_cast<CourseFinishedForm *>(Singleton<Secretary>::getInstance().createForm(FormType::CourseFinished));
+		form->fill(currentCourse, s);
+		Singleton<Headmaster>::getInstance().signForm(form);
+		form->execute();
 	}
 }

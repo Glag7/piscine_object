@@ -65,6 +65,7 @@ void	Student::graduate(Course* course)
 
 	if (it == subscribedCourses.end())
 		throw std::logic_error("...");
+	subscribedCourses.erase(it);
 }
 
 void	Student::addCourse(Course* course)

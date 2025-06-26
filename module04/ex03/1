@@ -1,0 +1,80 @@
+==80667== Memcheck, a memory error detector
+==80667== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==80667== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==80667== Command: ./mediator
+==80667== 
+==80667== Invalid read of size 8
+==80667==    at 0x493C534: std::_Rb_tree_increment(std::_Rb_tree_node_base const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==80667==    by 0x40713B: std::_Rb_tree_const_iterator<Student*>::operator++() (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40F590: Professor::doClass() (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40E8EE: Headmaster::attendClasses() (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x406674: main (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==  Address 0x4deae58 is 24 bytes inside a block of size 40 free'd
+==80667==    at 0x484B8AF: operator delete(void*) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==80667==    by 0x40768C: std::__new_allocator<std::_Rb_tree_node<Student*> >::deallocate(std::_Rb_tree_node<Student*>*, unsigned long) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x407664: std::allocator_traits<std::allocator<std::_Rb_tree_node<Student*> > >::deallocate(std::allocator<std::_Rb_tree_node<Student*> >&, std::_Rb_tree_node<Student*>*, unsigned long) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x407589: std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::_M_put_node(std::_Rb_tree_node<Student*>*) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x4074FD: std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::_M_drop_node(std::_Rb_tree_node<Student*>*) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40BE95: std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::_M_erase_aux(std::_Rb_tree_const_iterator<Student*>) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40BE42: std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::erase[abi:cxx11](std::_Rb_tree_const_iterator<Student*>) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40B8E4: std::set<Student*, std::less<Student*>, std::allocator<Student*> >::erase[abi:cxx11](std::_Rb_tree_const_iterator<Student*>) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40B758: Course::unsubscribe(Student*) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40A3AE: CourseFinishedForm::_execute() (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x405C8F: Form::execute() (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40F582: Professor::doClass() (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==  Block was alloc'd at
+==80667==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==80667==    by 0x4096EC: std::__new_allocator<std::_Rb_tree_node<Student*> >::allocate(unsigned long, void const*) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x409680: std::allocator_traits<std::allocator<std::_Rb_tree_node<Student*> > >::allocate(std::allocator<std::_Rb_tree_node<Student*> >&, unsigned long) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x409601: std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::_M_get_node() (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40BB4C: std::_Rb_tree_node<Student*>* std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::_M_create_node<Student* const&>(Student* const&) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40BB1F: std::_Rb_tree_node<Student*>* std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::_Alloc_node::operator()<Student* const&>(Student* const&) const (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40BA96: std::_Rb_tree_iterator<Student*> std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::_M_insert_<Student* const&, std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::_Alloc_node>(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, Student* const&, std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::_Alloc_node&) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40B984: std::pair<std::_Rb_tree_iterator<Student*>, bool> std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::_M_insert_unique<Student* const&>(Student* const&) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40B81C: std::set<Student*, std::less<Student*>, std::allocator<Student*> >::insert(Student* const&) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40B60F: Course::subscribe(Student*) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40A92E: SubscriptionToCourseForm::_execute() (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x405C8F: Form::execute() (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667== 
+==80667== Invalid read of size 8
+==80667==    at 0x493C550: std::_Rb_tree_increment(std::_Rb_tree_node_base const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==80667==    by 0x40713B: std::_Rb_tree_const_iterator<Student*>::operator++() (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40F590: Professor::doClass() (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40E8EE: Headmaster::attendClasses() (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x406674: main (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==  Address 0x4deaff8 is 8 bytes inside a block of size 40 free'd
+==80667==    at 0x484B8AF: operator delete(void*) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==80667==    by 0x40768C: std::__new_allocator<std::_Rb_tree_node<Student*> >::deallocate(std::_Rb_tree_node<Student*>*, unsigned long) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x407664: std::allocator_traits<std::allocator<std::_Rb_tree_node<Student*> > >::deallocate(std::allocator<std::_Rb_tree_node<Student*> >&, std::_Rb_tree_node<Student*>*, unsigned long) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x407589: std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::_M_put_node(std::_Rb_tree_node<Student*>*) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x4074FD: std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::_M_drop_node(std::_Rb_tree_node<Student*>*) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40BE95: std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::_M_erase_aux(std::_Rb_tree_const_iterator<Student*>) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40BE42: std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::erase[abi:cxx11](std::_Rb_tree_const_iterator<Student*>) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40B8E4: std::set<Student*, std::less<Student*>, std::allocator<Student*> >::erase[abi:cxx11](std::_Rb_tree_const_iterator<Student*>) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40B758: Course::unsubscribe(Student*) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40A3AE: CourseFinishedForm::_execute() (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x405C8F: Form::execute() (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40F582: Professor::doClass() (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==  Block was alloc'd at
+==80667==    at 0x4849013: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==80667==    by 0x4096EC: std::__new_allocator<std::_Rb_tree_node<Student*> >::allocate(unsigned long, void const*) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x409680: std::allocator_traits<std::allocator<std::_Rb_tree_node<Student*> > >::allocate(std::allocator<std::_Rb_tree_node<Student*> >&, unsigned long) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x409601: std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::_M_get_node() (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40BB4C: std::_Rb_tree_node<Student*>* std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::_M_create_node<Student* const&>(Student* const&) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40BB1F: std::_Rb_tree_node<Student*>* std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::_Alloc_node::operator()<Student* const&>(Student* const&) const (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40BA96: std::_Rb_tree_iterator<Student*> std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::_M_insert_<Student* const&, std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::_Alloc_node>(std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, Student* const&, std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::_Alloc_node&) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40B984: std::pair<std::_Rb_tree_iterator<Student*>, bool> std::_Rb_tree<Student*, Student*, std::_Identity<Student*>, std::less<Student*>, std::allocator<Student*> >::_M_insert_unique<Student* const&>(Student* const&) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40B81C: std::set<Student*, std::less<Student*>, std::allocator<Student*> >::insert(Student* const&) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40B60F: Course::subscribe(Student*) (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x40A92E: SubscriptionToCourseForm::_execute() (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667==    by 0x405C8F: Form::execute() (in /home/glaguyon/0projets/piscine_object/module04/ex03/mediator)
+==80667== 
+==80667== 
+==80667== HEAP SUMMARY:
+==80667==     in use at exit: 0 bytes in 0 blocks
+==80667==   total heap usage: 78 allocs, 78 frees, 80,240 bytes allocated
+==80667== 
+==80667== All heap blocks were freed -- no leaks are possible
+==80667== 
+==80667== For lists of detected and suppressed errors, rerun with: -s
+==80667== ERROR SUMMARY: 5 errors from 2 contexts (suppressed: 0 from 0)

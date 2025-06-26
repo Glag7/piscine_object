@@ -26,6 +26,7 @@ class Course
 
 		void	assign(Professor* professor);
 		void	subscribe(Student* student);
+		void	unsubscribe(Student* student);
 		void	moveStudents(Classroom *c);
 };
 

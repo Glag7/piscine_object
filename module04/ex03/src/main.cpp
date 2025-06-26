@@ -43,6 +43,8 @@ int main()
 	std::cout << "\n";
 	headmaster.attendClasses();
 	std::cout << "\n";
+	headmaster.attendClasses();
+	std::cout << "\n";
 
 	for (Student *student : studentList)
 		delete student;
